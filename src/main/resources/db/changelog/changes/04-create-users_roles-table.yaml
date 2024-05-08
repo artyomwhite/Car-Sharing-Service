@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-roles-table
+      author: Pavlo Stefiniv
+      changes:
+        - createTable:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: user.id
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: role.id
+                    referencedTableName: roles
+                    referencedColumnNames: id
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: users_roles
